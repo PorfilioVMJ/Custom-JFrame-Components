@@ -3,5 +3,6 @@ Adds custom JFrame components for creating applications
 This adds new components for your applications
 
 # Current New Components
--EditorMenuBar
+-EditorMenuBar (Currently still adding features)
+
 -MTextArea
