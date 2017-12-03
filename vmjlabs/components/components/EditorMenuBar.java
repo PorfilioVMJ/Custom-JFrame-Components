@@ -176,4 +176,8 @@ public class EditorMenuBar extends JMenuBar{
         return openChooseValue;
     }
 
+    public void addJMenu(JMenu jMenu){
+        add(jMenu);
+    }
+
 }

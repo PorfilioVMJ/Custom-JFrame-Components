@@ -28,7 +28,7 @@ public class ExampleClass1 extends JFrame{
         customMenu = new JMenu();
         customMenu.setText("Window");
 
-        menuBar.add(customMenu);
+        menuBar.addJMenu(customMenu);
 
         this.setJMenuBar(menuBar);
         this.add(pane);
