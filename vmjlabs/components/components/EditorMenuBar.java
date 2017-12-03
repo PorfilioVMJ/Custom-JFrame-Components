@@ -3,6 +3,10 @@ package net.vmjlabs.components.components;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class EditorMenuBar extends JMenuBar{
 
@@ -28,7 +32,7 @@ public class EditorMenuBar extends JMenuBar{
     JFileChooser openFile;
     JFileChooser saveNewFile;
 
-    public EditorMenuBar(JFrame frame){
+    public EditorMenuBar(JFrame frame, MTextArea textPane){
 
         file = new JMenu();
         file.setText("File");
@@ -48,6 +52,30 @@ public class EditorMenuBar extends JMenuBar{
             @Override
             public void actionPerformed(ActionEvent e) {
                 openFile.showDialog(frame, "Open");
+                openFile.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(openFile.getSelectedFile().getPath());
+                        try {
+                            System.out.println(openFile.getSelectedFile().getPath());
+                            File file = new File(openFile.getSelectedFile().getPath());
+                            FileReader fileReader = new FileReader(file);
+                            BufferedReader bufferedReader = new BufferedReader(fileReader);
+                            StringBuffer stringBuffer = new StringBuffer();
+                            String line;
+                            while ((line = bufferedReader.readLine()) != null) {
+                                stringBuffer.append(line);
+                                stringBuffer.append("\n");
+                                textPane.appendLine(line);
+                            }
+                            fileReader.close();
+                            System.out.println("Contents of file:");
+                            System.out.println(stringBuffer.toString());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 

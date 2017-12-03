@@ -9,17 +9,19 @@ public class ComponentTester extends JFrame{
 
     EditorMenuBar menuBar;
     MTextArea textArea;
+    JScrollPane pane;
 
     public ComponentTester(){
         this.setTitle("Tester");
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
 
-        menuBar = new EditorMenuBar(this);
         textArea = new MTextArea();
+        menuBar = new EditorMenuBar(this, textArea);
+        pane = new JScrollPane(textArea);
 
         this.setJMenuBar(menuBar);
-        this.add(textArea);
+        this.add(pane);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
