@@ -32,3 +32,5 @@ This adds new components for your applications
             new ComponentTester();
         }
 ```
+###Result
+![alt text](https://raw.githubusercontent.com/PorfilioVMJ/Custom-JFrame-Components/master/vmjlabs/examples/example1.png)
