@@ -105,7 +105,7 @@ public class EditorMenuBar extends JMenuBar{
                         ex.printStackTrace();
                     }
                 }else{
-
+                    System.out.println("Canceled Save Operation");
                 }
             }
         });
