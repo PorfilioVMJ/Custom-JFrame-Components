@@ -32,4 +32,4 @@ This adds new components for your applications
             new ComponentTester();
         }
 ```
-![Result](https://raw.githubusercontent.com/PorfilioVMJ/Custom-JFrame-Components/master/vmjlabs/examples/example1.png)
+![Result](https://raw.githubusercontent.com/PorfilioVMJ/Custom-JFrame-Components/blob/master/vmjlabs/examples/Example1.png)
