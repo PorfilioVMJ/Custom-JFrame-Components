@@ -32,6 +32,9 @@ public class EditorMenuBar extends JMenuBar{
     JFileChooser openFile;
     JFileChooser saveNewFile;
 
+    private String filePath = "";
+    private int openChooseValue;
+
     public EditorMenuBar(JFrame frame, MTextArea textPane){
 
         file = new JMenu();
@@ -51,31 +54,33 @@ public class EditorMenuBar extends JMenuBar{
         open.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                openFile.showDialog(frame, "Open");
-                openFile.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                int returnValue = openFile.showDialog(frame, "Open");
+                openChooseValue = returnValue;
+                if(returnValue == JFileChooser.APPROVE_OPTION) {
+                    textPane.setText(null);
+                    System.out.println(openFile.getSelectedFile().getPath());
+                    filePath = openFile.getSelectedFile().getPath();
+                    try {
                         System.out.println(openFile.getSelectedFile().getPath());
-                        try {
-                            System.out.println(openFile.getSelectedFile().getPath());
-                            File file = new File(openFile.getSelectedFile().getPath());
-                            FileReader fileReader = new FileReader(file);
-                            BufferedReader bufferedReader = new BufferedReader(fileReader);
-                            StringBuffer stringBuffer = new StringBuffer();
-                            String line;
-                            while ((line = bufferedReader.readLine()) != null) {
-                                stringBuffer.append(line);
-                                stringBuffer.append("\n");
-                                textPane.appendLine(line);
-                            }
-                            fileReader.close();
-                            System.out.println("Contents of file:");
-                            System.out.println(stringBuffer.toString());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
+                        File file = new File(openFile.getSelectedFile().getPath());
+                        FileReader fileReader = new FileReader(file);
+                        BufferedReader bufferedReader = new BufferedReader(fileReader);
+                        StringBuffer stringBuffer = new StringBuffer();
+                        String line;
+                        while ((line = bufferedReader.readLine()) != null) {
+                            stringBuffer.append(line);
+                            stringBuffer.append("\n");
+                            textPane.appendLine(line);
                         }
+                        fileReader.close();
+                        System.out.println("Contents of file:");
+                        System.out.println(stringBuffer.toString());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
-                });
+                }else {
+                    System.out.println("Canceled");
+                }
             }
         });
 
@@ -127,6 +132,13 @@ public class EditorMenuBar extends JMenuBar{
         add(edit);
         add(view);
         add(help);
+    }
+
+    public String getFilePath(){
+        return filePath;
+    }
+    public int getOpenChooseValue(){
+        return openChooseValue;
     }
 
 }

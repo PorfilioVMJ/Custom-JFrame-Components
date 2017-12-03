@@ -12,7 +12,7 @@ public class ComponentTester extends JFrame{
     JScrollPane pane;
 
     public ComponentTester(){
-        this.setTitle("Tester");
+        this.setTitle("Test Notepad");
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
 
