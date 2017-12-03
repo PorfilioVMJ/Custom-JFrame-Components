@@ -34,6 +34,8 @@ public class EditorMenuBar extends JMenuBar{
     private String filePath = "";
     private int openChooseValue;
 
+    String currentSaveDirectory = "C:/";
+
     public EditorMenuBar(JFrame frame, MTextArea textPane){
 
         file = new JMenu();
@@ -74,17 +76,35 @@ public class EditorMenuBar extends JMenuBar{
                         fileReader.close();
                         System.out.println("Contents of file:");
                         System.out.println(stringBuffer.toString());
+                        save.setEnabled(true);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
+                    currentSaveDirectory = openFile.getSelectedFile().getPath();
                 }else {
                     System.out.println("Canceled");
                 }
+                currentSaveDirectory = openFile.getSelectedFile().getPath();
+                filePath = openFile.getSelectedFile().getPath();
             }
         });
 
         save = new JMenuItem();
         save.setText("Save");
+        save.setEnabled(false);
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(filePath);
+                FileWriter fw;
+                try {
+                    fw = new FileWriter(filePath, false);
+                    textPane.write(fw);
+                }catch(IOException ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
         saveAs = new JMenuItem();
         saveAs.setText("Save As");
         saveNewFile = new JFileChooser();
@@ -97,16 +117,18 @@ public class EditorMenuBar extends JMenuBar{
                     System.out.println(saveNewFile.getSelectedFile().getPath());
                     String path = saveNewFile.getSelectedFile().getPath();
                     FileWriter fw;
-
                     try {
                         fw = new FileWriter(saveNewFile.getSelectedFile().getAbsoluteFile(), true);
                         textPane.write(fw);
                     }catch(IOException ex){
                         ex.printStackTrace();
                     }
-                }else{
+                    filePath = path;
+                    currentSaveDirectory = path;
+                }else {
                     System.out.println("Canceled Save Operation");
                 }
+                save.setEnabled(true);
             }
         });
         //Edit Menu
