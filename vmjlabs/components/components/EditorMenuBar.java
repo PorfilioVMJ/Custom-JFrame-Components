@@ -26,6 +26,7 @@ public class EditorMenuBar extends JMenuBar{
     JMenuItem statusBar;
 
     JFileChooser openFile;
+    JFileChooser saveNewFile;
 
     public EditorMenuBar(JFrame frame){
 
@@ -54,6 +55,14 @@ public class EditorMenuBar extends JMenuBar{
         save.setText("Save");
         saveAs = new JMenuItem();
         saveAs.setText("Save As");
+        saveNewFile = new JFileChooser();
+        saveAs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveNewFile.setName("Save as");
+                saveNewFile.showDialog(frame, "Save");
+            }
+        });
         //Edit Menu
         undo = new JMenuItem();
         undo.setText("Undo");
