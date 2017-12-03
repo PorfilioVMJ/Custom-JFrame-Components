@@ -8,35 +8,27 @@ This adds new components for your applications
   -MTextArea
 
 # Example class
-package net.vmjlabs.components;
+```
+        EditorMenuBar menuBar;
+        MTextArea textArea;
+        JScrollPane pane;
 
-import net.vmjlabs.components.components.EditorMenuBar;
-import net.vmjlabs.components.components.MTextArea;
+        public MyClass(){
+            this.setTitle("Test Notepad");
+            this.setSize(1280, 720);
+            this.setLocationRelativeTo(null);
 
-import javax.swing.*;
+            textArea = new MTextArea();
+            menuBar = new EditorMenuBar(this, textArea);
+            pane = new JScrollPane(textArea);
 
-public class MyNotepad extends JFrame{
+            this.setJMenuBar(menuBar);
+            this.add(pane);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setVisible(true);
+        }
 
-    EditorMenuBar menuBar;
-    MTextArea textArea;
-    JScrollPane pane;
-
-    public ComponentTester(){
-        this.setTitle("Test Notepad");
-        this.setSize(1280, 720);
-        this.setLocationRelativeTo(null);
-
-        textArea = new MTextArea();
-        menuBar = new EditorMenuBar(this, textArea);
-        pane = new JScrollPane(textArea);
-
-        this.setJMenuBar(menuBar);
-        this.add(pane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
-    public static void main(String[] args){
-        new ComponentTester();
-    }
-}
+        public static void main(String[] args){
+            new ComponentTester();
+        }
+```
