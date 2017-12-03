@@ -12,14 +12,23 @@ public class ExampleClass1 extends JFrame{
     MTextArea textArea;
     JScrollPane pane;
 
+    //Add Custom Menus
+    JMenu customMenu;
+
     public ExampleClass1(){
-        this.setTitle("Test Notepad");
+        this.setTitle("Example Window");
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
 
         textArea = new MTextArea();
         menuBar = new EditorMenuBar(this, textArea);
         pane = new JScrollPane(textArea);
+
+        //Initialize your custom menu
+        customMenu = new JMenu();
+        customMenu.setText("Window");
+
+        menuBar.add(customMenu);
 
         this.setJMenuBar(menuBar);
         this.add(pane);
