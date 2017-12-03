@@ -1,12 +1,11 @@
 package net.vmjlabs.components.components;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Utilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class EditorMenuBar extends JMenuBar{
 
@@ -93,7 +92,21 @@ public class EditorMenuBar extends JMenuBar{
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveNewFile.setName("Save as");
-                saveNewFile.showDialog(frame, "Save");
+                int returnValue = saveNewFile.showDialog(frame, "Save");
+                if(returnValue == JFileChooser.APPROVE_OPTION){
+                    System.out.println(saveNewFile.getSelectedFile().getPath());
+                    String path = saveNewFile.getSelectedFile().getPath();
+                    FileWriter fw;
+
+                    try {
+                        fw = new FileWriter(saveNewFile.getSelectedFile().getAbsoluteFile(), true);
+                        textPane.write(fw);
+                    }catch(IOException ex){
+                        ex.printStackTrace();
+                    }
+                }else{
+
+                }
             }
         });
         //Edit Menu
