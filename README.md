@@ -4,4 +4,5 @@ This adds new components for your applications
 
 # Current New Components
   -EditorMenuBar (Currently still adding features)
+  
   -MTextArea
