@@ -1,10 +1,14 @@
 package net.vmjlabs.components.components;
 
+import net.vmjlabs.components.components.menuBarObjects.FindTextWindow;
+
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Utilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.*;
 
 public class EditorMenuBar extends JMenuBar{
@@ -134,18 +138,41 @@ public class EditorMenuBar extends JMenuBar{
         //Edit Menu
         undo = new JMenuItem();
         undo.setText("Undo");
-        cut = new JMenuItem();
+        cut = new JMenuItem(new DefaultEditorKit.CutAction());
         cut.setText("Cut");
-        copy = new JMenuItem();
+        cut.setMnemonic(KeyEvent.VK_X);
+        copy = new JMenuItem(new DefaultEditorKit.CopyAction());
         copy.setText("Copy");
-        paste = new JMenuItem();
+        copy.setMnemonic(KeyEvent.VK_C);
+        paste = new JMenuItem(new DefaultEditorKit.PasteAction());
         paste.setText("Paste");
+        paste.setMnemonic(KeyEvent.VK_V);
         delete = new JMenuItem();
         delete.setText("Delete");
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(textPane.getSelectedText() != null){
+                    textPane.replaceSelection("");
+                }
+            }
+        });
         find = new JMenuItem();
         find.setText("Find");
+        find.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FindTextWindow(textPane);
+            }
+        });
         selectAll = new JMenuItem();
         selectAll.setText("Select All");
+        selectAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textPane.selectAll();
+            }
+        });
         //view
         statusBar = new JMenuItem();
         statusBar.setText("Status Bar");
