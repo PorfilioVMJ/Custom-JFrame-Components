@@ -12,6 +12,6 @@ public class MTextArea extends JTextPane{
         setText(getText()+text);
     }
     public void appendLine(String line){
-        setText(getText()+"\n"+line);
+        setText(getText()+line+"\n");
     }
 }
