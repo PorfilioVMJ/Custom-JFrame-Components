@@ -31,8 +31,10 @@ public class FindTextWindow extends JFrame{
                     String[] words = text.split(" ");
                     for(int i=0;i<words.length;i++){
                         String word = words[i];
+                        //Not working passed this point
                         if(word=="world"){
                             System.out.println("Found");
+
                         }
                     }
                 }

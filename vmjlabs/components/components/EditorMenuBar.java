@@ -171,6 +171,7 @@ public class EditorMenuBar extends JMenuBar{
             @Override
             public void actionPerformed(ActionEvent e) {
                 textPane.selectAll();
+                //SELECT ALL
             }
         });
         //view
